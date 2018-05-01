@@ -1,9 +1,11 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class Solution {
-public:
-	int climbStairs(int n) {
+class Solution
+{
+  public:
+	int climbStairs(int n)
+	{
 		int a = 1, b = 1;
 		while (n--)
 			a = (b += a) - a;

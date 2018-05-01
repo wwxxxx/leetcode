@@ -1,24 +1,29 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-struct TreeNode {
+struct TreeNode
+{
 	int val;
 	TreeNode *left;
 	TreeNode *right;
 	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 
-class Solution {
-public:
-	vector<double> averageOfLevels(TreeNode* root) {
+class Solution
+{
+  public:
+	vector<double> averageOfLevels(TreeNode *root)
+	{
 		vector<double> res;
-		queue<TreeNode*> q;
+		queue<TreeNode *> q;
 		q.push(root);
-		while (!q.empty()) {
+		while (!q.empty())
+		{
 			long temp = 0;
-			int  s = q.size();
-			for (int i = 0; i < s; i++) {
-				TreeNode* t = q.front();
+			int s = q.size();
+			for (int i = 0; i < s; i++)
+			{
+				TreeNode *t = q.front();
 				q.pop();
 				if (t->left)
 					q.push(t->left);
