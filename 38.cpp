@@ -31,5 +31,31 @@ class Solution
         ret.push_back(cnt + '0');
         ret.push_back(re[re.size() - 1]);
         return ret;
+
+        /*
+        string ret = "1";
+        for (int i = 2; i <= n; ++i)
+        {
+            string tmp = "";
+            int cnt = 1;
+            char pre = ret[0];
+            int j = 1;
+            while (j < ret.size())
+            {
+                if (ret[j] == pre)
+                    cnt++;
+                else
+                {
+                    tmp += to_string(cnt) + pre;
+                    pre = ret[j];
+                    cnt = 1;
+                }
+                j++;
+            }
+            tmp += to_string(cnt) + pre;
+            ret = tmp;
+        }
+        return ret;
+        */
     }
 };
