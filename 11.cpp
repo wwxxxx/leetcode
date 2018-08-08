@@ -10,12 +10,18 @@ static int x = []() {
 class Solution
 {
   public:
-    string intToRoman(int num)
+    int maxArea(vector<int> &height)
     {
-        string M[] = {"", "M", "MM", "MMM"};
-        string C[] = {"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"};
-        string X[] = {"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"};
-        string I[] = {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"};
-        return M[num / 1000] + C[num % 1000 / 100] + X[num % 100 / 10] + I[num % 10];
+        int ret = INT_MIN, lo = 0, hi = height.size() - 1;
+        while (lo < hi)
+        {
+            int h = min(height[lo], height[hi]);
+            ret = max(ret, (hi - lo) * h);
+            while (height[lo] <= h && lo < hi)
+                lo++;
+            while (height[hi] <= h && lo < hi)
+                hi--;
+        }
+        return ret;
     }
 };
