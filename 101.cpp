@@ -1,6 +1,12 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+static int x = []() {
+	std::ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	return 0;
+}();
+
 struct TreeNode
 {
 	int val;
@@ -12,19 +18,25 @@ struct TreeNode
 class Solution
 {
   public:
-	bool bfs(TreeNode *l, TreeNode *r)
+	bool helper(TreeNode *node1, TreeNode *node2)
 	{
-		if (l == nullptr || r == nullptr)
-			return l == r;
-		if (l->val != r->val)
+		if (node1 == nullptr && node2 == nullptr)
+			return true;
+		else if (node1 == nullptr || node2 == nullptr)
 			return false;
-		return bfs(l->left, r->right) && bfs(l->right, r->left);
+		else
+		{
+			if (node1->val == node2->val)
+				return helper(node1->left, node2->right) && helper(node1->right, node2->left);
+			else
+				return false;
+		}
 	}
 
 	bool isSymmetric(TreeNode *root)
 	{
-		if (!root)
+		if (root == nullptr)
 			return true;
-		return bfs(root->left, root->right);
+		return helper(root->left, root->right);
 	}
 };
