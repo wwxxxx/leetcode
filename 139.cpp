@@ -12,19 +12,23 @@ class Solution
   public:
     bool wordBreak(string s, vector<string> &wordDict)
     {
-        if (wordDict.empty())
+        set<string> dict(wordDict.begin(), wordDict.end());
+        if (dict.empty())
             return false;
         vector<bool> dp(s.size() + 1, false);
         dp[0] = true;
-        for (int i = 1; i < s.size() + 1; ++i)
+        for (int i = 1; i <= s.size(); ++i)
         {
-            for (int j = 0; j < wordDict.size(); ++j)
+            for (int j = i - 1; j >= 0; --j)
             {
-                if (dp[i])
+                if (dp[j])
                 {
-                    string str = s.substr(i, wordDict[j].size());
-                    if (str == wordDict[j])
-                        dp[i + wordDict[j].size()] = true;
+                    string word = s.substr(j, i - j);
+                    if (dict.find(word) != dict.end())
+                    {
+                        dp[i] = true;
+                        break;
+                    }
                 }
             }
         }
